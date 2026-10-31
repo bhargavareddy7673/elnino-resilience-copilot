@@ -1,0 +1,19 @@
+# El Niño Resilience Co-Pilot - Python Dependencies
+# Production dependencies for Streamlit Community Cloud and Local Execution
+# Verified in clean virtual environment (Python 3.11.17)
+
+# Core Streamlit Web Application Framework
+streamlit>=1.30.0,<=1.66.1
+requests>=2.28.0,<=2.34.2
+plotly>=5.18.0,<=7.1.0
+pandas>=1.5.0,<=3.1.0
+numpy>=1.24.0,<=2.4.6
+
+# Transformer-based Multilingual NLP (SetFit Intent Classification)
+# Pinned to verified, tested runtime versions
+torch>=2.0.0,<=2.15.0
+transformers>=4.35.0,<=5.22.1
+sentence-transformers>=2.2.2,<=6.2.0
+setfit>=1.0.0,<=1.2.0
+huggingface-hub>=0.20.0,<=2.4.0
+scikit-learn>=1.2.0,<=1.9.1
