@@ -1,6 +1,6 @@
-# 🌾 El Niño Resilience Co-Pilot
-### రైతు మిత్ర (RythuMithra) • Smart Farm Digital Twin & Climate Advisor
-**Bilingual Spoken Voice & Text Decision Support for Smallholder Farmers**
+# 🌾 RythuMithra NLP
+### Multilingual Conversational Voice Assistant for El Niño Resilience (రైతు మిత్ర)
+**An End-to-End Natural Language Processing (NLP) & Speech Decision Support System for Smallholder Farmers**
 
 > **Target Agro-Climatic Regions:** Andhra Pradesh (Default: Kurnool & Kadapa) & Telangana  
 > **Key Crops:** Turmeric (పసుపు), Banana (అరటి), Paddy (వరి)  
@@ -12,7 +12,7 @@
 
 Climate phenomena such as **El Niño** induce extreme weather shocks across South India, leading to delayed monsoon onset, extended dry spells, thermal anomalies, and groundwater depletion during critical crop phenological stages.
 
-**RythuMithra AI (రైతు మిత్ర)** is an end-to-end intelligent agricultural decision-support platform designed specifically for smallholder farmers. It integrates a live **Farm Digital Twin**, real-time meteorological intelligence, computer vision crop pathology, and a **bilingual spoken voice & text conversational advisor** in English, Telugu, and code-mixed Tanglish.
+**RythuMithra NLP (రైతు మిత్ర)** is an end-to-end intelligent agricultural Natural Language Processing & decision-support platform designed specifically for smallholder farmers. It integrates a live **Farm Digital Twin**, real-time meteorological intelligence, computer vision crop pathology, and a **bilingual spoken voice & text conversational advisor** in English, Telugu, and code-mixed Tanglish.
 
 ---
 

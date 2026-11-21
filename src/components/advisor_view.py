@@ -151,7 +151,7 @@ def render_advisor_view(farm_profile: Dict[str, Any], lang: str = "en") -> None:
     crop_te = crop_te_map.get(crop, crop)
 
     # 1. Header Card with Active Farm Context and Clear Action
-    adv_title = "El Niño వ్యవసాయ సలహాదారు • రైతు మిత్ర (RythuMithra)" if lang == "te" else "El Niño Farm Advisor & Voice Co-Pilot (రైతు మిత్ర)"
+    adv_title = "RythuMithra NLP: బహుభాషా ఏఐ వ్యవసాయ సలహాదారు (రైతు మిత్ర)" if lang == "te" else "RythuMithra NLP: Multilingual Conversational Voice Assistant (రైతు మిత్ర)"
     adv_sub = (
         f"📍 {loc_str} • 🌿 {crop_te if lang == 'te' else crop} ({farm_profile.get('land_area', 4.0)} ఎకరాలు) • రియల్-టైమ్ వ్యవసాయ & వాతావరణ మార్గదర్శనం"
         if lang == "te"
@@ -186,7 +186,7 @@ def render_advisor_view(farm_profile: Dict[str, Any], lang: str = "en") -> None:
             st.rerun()
 
     # 2. PROMINENT SPOKEN VOICE CHAT ASSISTANT (Native Top-Level Microphone)
-    v_card_title = "🎙️ రైతు వాయిస్ అసిస్టెంట్ • El Niño Spoken Voice Co-Pilot" if lang == "te" else "🎙️ El Niño Spoken Voice Co-Pilot (రైతు మిత్ర)"
+    v_card_title = "🎙️ రైతు వాయిస్ అసిస్టెంట్ • RythuMithra Spoken NLP Co-Pilot" if lang == "te" else "🎙️ RythuMithra Spoken NLP Co-Pilot (రైతు మిత్ర)"
     v_card_sub = (
         "మైక్రోఫోన్ నొక్కి తెలుగు లేదా ఇంగ్లీషులో మాట్లాడండి • రికార్డింగ్ ఆపిన వెంటనే నేరుగా సమాధానం వస్తుంది"
         if lang == "te"

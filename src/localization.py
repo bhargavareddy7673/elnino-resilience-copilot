@@ -7,12 +7,12 @@ weather intelligence, and system status notes in the El Niño Resilience Co-Pilo
 TRANSLATIONS = {
     # App Header & Metadata
     "app_title": {
-        "en": "El Niño Resilience Co-Pilot",
-        "te": "El Niño Resilience Co-Pilot (రైతు మిత్ర)",
+        "en": "RythuMithra NLP",
+        "te": "రైతు మిత్ర NLP (RythuMithra)",
     },
     "app_tagline": {
-        "en": "రైతు మిత్ర (RythuMithra) • Farm Digital Twin & Climate Advisor",
-        "te": "రైతు మిత్ర (RythuMithra) • డిజిటల్ పొలం & వాతావరణ సలహాదారు",
+        "en": "Multilingual Conversational Voice Assistant for El Niño Resilience • రైతు మిత్ర",
+        "te": "రైతు మిత్ర (RythuMithra) • ఎల్ నినో రక్షణ కోసం బహుభాషా సంభాషణాత్మక వాయిస్ అసిస్టెంట్",
     },
     "app_disclaimer": {
         "en": (

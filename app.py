@@ -27,7 +27,7 @@ from src.components.enso_view import render_enso_view
 # 1. PAGE CONFIGURATION
 # =============================================================================
 st.set_page_config(
-    page_title="El Niño Resilience Co-Pilot",
+    page_title="RythuMithra NLP: Multilingual Conversational Voice Assistant for El Niño Resilience",
     page_icon="🌾",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -408,10 +408,10 @@ with st.sidebar:
         """
         <div style="padding: 6px 0 16px 0; border-bottom: 1px solid #e2ebe5; margin-bottom: 16px;">
             <div style="font-size: 1.25rem; font-weight: 800; color: #1b4332; display: flex; align-items: center; gap: 8px; line-height: 1.25;">
-                🌾 El Niño Resilience Co-Pilot
+                🌾 RythuMithra NLP
             </div>
-            <div style="font-size: 0.82rem; color: #2D6A4F; font-weight: 700; margin-top: 4px;">
-                రైతు మిత్ర (RythuMithra) • Farm Digital Twin & Climate Advisor
+            <div style="font-size: 0.80rem; color: #2D6A4F; font-weight: 700; margin-top: 4px; line-height: 1.35;">
+                Multilingual Conversational Voice Assistant for El Niño Resilience • రైతు మిత్ర
             </div>
         </div>
         """,
