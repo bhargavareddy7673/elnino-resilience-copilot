@@ -27,6 +27,7 @@ build/
 tmp_*/
 scratch/
 *.pdf
+!RythuMithra_NLP_Project_Report.pdf
 
 # Environment variables, credentials and sensitive data
 .env
