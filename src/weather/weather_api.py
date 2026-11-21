@@ -4,7 +4,7 @@ Retrieves real-time atmospheric conditions, 7-day agricultural forecasts,
 and recent 30-day historical precipitation with caching, timeouts, and error handling.
 """
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
 import os
 import json
@@ -193,6 +193,22 @@ def get_weather_intelligence(latitude: float, longitude: float, force_refresh: b
             today_date = datetime.now().date()
             historical_df = df_all[df_all["date"] < today_date].tail(30).copy()
             forecast_df = df_all[df_all["date"] >= today_date].head(16).copy()
+
+            # Robust offline cached snapshot fallback:
+            # If df_all comes from an older cached snapshot where all dates are in the past (< today_date),
+            # extract the snapshot's intended 16-day forecast trajectory (last 16 days) and 30-day historical window,
+            # adjusting their dates forward relative to today so that the 7-day forecast, charts, and advisory logic
+            # have complete data rather than an empty dataframe.
+            if forecast_df.empty and len(df_all) >= 16:
+                raw_fc = df_all.tail(16).copy().reset_index(drop=True)
+                raw_fc["date"] = [today_date + timedelta(days=i) for i in range(len(raw_fc))]
+                forecast_df = raw_fc
+
+                raw_hist = df_all.iloc[:-16].tail(30).copy().reset_index(drop=True)
+                hist_len = len(raw_hist)
+                raw_hist["date"] = [today_date - timedelta(days=hist_len - i) for i in range(hist_len)]
+                historical_df = raw_hist
+
             historical_df["cumulative_precipitation"] = historical_df["precipitation"].cumsum()
 
             result["historical_df"] = historical_df

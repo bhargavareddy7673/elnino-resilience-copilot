@@ -36,7 +36,7 @@ def render_simulator_view(
     """Render the What-If Farm Simulator screen."""
     crop = farm_profile.get("crop", "Turmeric")
     crop_info = get_crop_profile(crop)
-    district = farm_profile.get("district", "Kadapa (YSR Kadapa)").split("(")[0].strip()
+    district = farm_profile.get("district", "Kurnool").split("(")[0].strip()
 
     # 1. Header & Title
     st.markdown(f"## 🔮 {get_text('simulator_tab_title', lang)}")

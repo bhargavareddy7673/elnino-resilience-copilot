@@ -8,11 +8,11 @@ TRANSLATIONS = {
     # App Header & Metadata
     "app_title": {
         "en": "El Niño Resilience Co-Pilot",
-        "te": "ఎల్ నినో స్థితిస్థాపకత కో-పైలట్",
+        "te": "El Niño Resilience Co-Pilot (రైతు మిత్ర)",
     },
     "app_tagline": {
-        "en": "Farm Digital Twin & Multilingual Agricultural Advisor",
-        "te": "రైతు డిజిటల్ పొలం & వ్యవసాయ సలహాదారు",
+        "en": "రైతు మిత్ర (RythuMithra) • Farm Digital Twin & Climate Advisor",
+        "te": "రైతు మిత్ర (RythuMithra) • డిజిటల్ పొలం & వాతావరణ సలహాదారు",
     },
     "app_disclaimer": {
         "en": (
@@ -39,8 +39,8 @@ TRANSLATIONS = {
         "te": "వాతావరణం",
     },
     "nav_advisor": {
-        "en": "AI Farm Advisor",
-        "te": "ఏఐ వ్యవసాయ సలహాదారు",
+        "en": "AI Farm Advisor (Voice & Chat)",
+        "te": "రైతు మిత్ర AI (వాయిస్ & చాట్)",
     },
     "nav_guidance": {
         "en": "Crop Guidance",
@@ -461,8 +461,8 @@ TRANSLATIONS = {
         "te": "త్వరిత ప్రశ్నలు",
     },
     "chat_input_placeholder": {
-        "en": "Ask about weather, rainfall forecast, crop precautions, or water stress...",
-        "te": "వాతావరణం, వర్ష సూచన, పంట జాగ్రత్తలు లేదా నీటి కొరత గురించి అడగండి...",
+        "en": "Ask about farming, weather, water budgets, fertilizer planning, or El Niño...",
+        "te": "పంటలు, వాతావరణం, నీటి తడులు, ఎరువుల ప్రణాళిక లేదా ఎల్ నినో గురించి అడగండి...",
     },
     "grounding_details_title": {
         "en": "View Grounding Data & References",
@@ -475,6 +475,58 @@ TRANSLATIONS = {
     "advisor_analyzing": {
         "en": "AI Advisor is analyzing farm conditions and weather telemetry...",
         "te": "వ్యవసాయ సలహాదారు విశ్లేషిస్తున్నారు...",
+    },
+    "multimodal_tools_title": {
+        "en": "Multimodal AI Tools: Voice Question (Whisper ASR) & Crop Disease Diagnosis",
+        "te": "మల్టీమోడల్ ఏఐ సాధనాలు: వాయిస్ ప్రశ్నలు (Whisper ASR) & తెగుళ్ల ఫోటో నిర్ధారణ",
+    },
+    "voice_input_label": {
+        "en": "🎙️ Record Voice Question (Speak in Telugu or English)",
+        "te": "🎙️ మాట్లాడి రికార్డ్ చేయండి (తెలుగు లేదా ఇంగ్లీషు)",
+    },
+    "upload_leaf_photo": {
+        "en": "📷 Upload or take a photo of affected leaf, rhizome, or crop",
+        "te": "📷 తెగులు సోకిన ఆకు లేదా పంట ఫోటోను అప్‌లోడ్ చేయండి",
+    },
+    "btn_listen_audio": {
+        "en": "🔊 Listen Spoken Advisory",
+        "te": "🔊 సలహా వినండి",
+    },
+    "multimodal_tab_voice": {
+        "en": "🎙️ Voice Query (Whisper ASR)",
+        "te": "🎙️ వాయిస్ ప్రశ్న (Whisper ASR)",
+    },
+    "multimodal_tab_vision": {
+        "en": "📷 Crop Disease Diagnosis",
+        "te": "📷 పంట తెగుళ్ల ఫోటో నిర్ధారణ",
+    },
+    "voice_transcribed_label": {
+        "en": "Transcribed Speech",
+        "te": "గుర్తించిన మాటలు",
+    },
+    "btn_submit_voice_query": {
+        "en": "🚀 Ask Farm Advisor",
+        "te": "🚀 సలహాదారుని అడగండి",
+    },
+    "voice_audio_file_label": {
+        "en": "Or upload an audio file (.wav, .mp3, .m4a)",
+        "te": "లేదా ఆడియో ఫైల్‌ను అప్‌లోడ్ చేయండి (.wav, .mp3, .m4a)",
+    },
+    "vision_img_source_label": {
+        "en": "Image Input Method",
+        "te": "ఫోటో ఎంపిక విధానం",
+    },
+    "vision_source_upload": {
+        "en": "📁 Upload Photo",
+        "te": "📁 ఫోటో అప్‌లోడ్",
+    },
+    "vision_source_camera": {
+        "en": "📸 Take Camera Photo",
+        "te": "📸 కెమెరాతో తీయండి",
+    },
+    "ask_advisor_about_diagnosis": {
+        "en": "💬 Ask Advisor for Treatment Plan",
+        "te": "💬 ఈ తెగులు నివారణ ప్రణాళికను అడగండి",
     },
 
     # --- HOME VIEW ---

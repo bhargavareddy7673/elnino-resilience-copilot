@@ -4,12 +4,12 @@ Contains district lists for Andhra Pradesh and Telangana, supported crops,
 soil types, irrigation methods, and default demo values.
 """
 
-# Default demo location requested: Kadapa district, Andhra Pradesh
+# Default demo location requested: Kurnool district, Andhra Pradesh
 DEFAULT_STATE = "Andhra Pradesh"
-DEFAULT_DISTRICT = "Kadapa (YSR Kadapa)"
+DEFAULT_DISTRICT = "Kurnool"
 DEFAULT_VILLAGE = ""  # Editable default without assuming any specific village
 DEFAULT_CROP = "Turmeric"
-DEFAULT_LAND_ACRES = 3.00
+DEFAULT_LAND_ACRES = 4.00
 DEFAULT_SOIL = "Red Sandy Loam"
 DEFAULT_IRRIGATION = "Borewell / Groundwater"
 
@@ -18,6 +18,7 @@ SUPPORTED_STATES = ["Andhra Pradesh", "Telangana"]
 
 # Districts for Andhra Pradesh (including reorganized districts)
 AP_DISTRICTS = [
+    "Kurnool",
     "Kadapa (YSR Kadapa)",
     "Alluri Sitharama Raju",
     "Anakapalli",
@@ -31,7 +32,6 @@ AP_DISTRICTS = [
     "Guntur",
     "Kakinada",
     "Krishna",
-    "Kurnool",
     "Nandyal",
     "NTR",
     "Palnadu",

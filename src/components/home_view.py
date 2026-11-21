@@ -40,7 +40,7 @@ def render_home_view(
         navigate_to: Callback to change navigation section.
     """
     state = farm_profile.get("state", "Andhra Pradesh")
-    district = farm_profile.get("district", "Kadapa (YSR Kadapa)")
+    district = farm_profile.get("district", "Kurnool")
     village = farm_profile.get("village", "").strip()
     crop = farm_profile.get("crop", "Turmeric")
     land_area = farm_profile.get("land_area", 4.0)
@@ -123,6 +123,47 @@ def render_home_view(
         """,
         unsafe_allow_html=True,
     )
+
+    # =========================================================================
+    # 1.5 PROMINENT MULTIMODAL AI FARM ADVISOR SPOTLIGHT BANNER
+    # =========================================================================
+    st.markdown(
+        f"""
+        <div style="background-color: #FFFFFF; border: 2px solid #2D6A4F; border-radius: 14px; padding: 18px 22px; margin-bottom: 16px; box-shadow: 0 3px 10px rgba(45,106,79,0.08);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                <div>
+                    <div style="font-size: 1.2rem; font-weight: 800; color: #1B4332; display: flex; align-items: center; gap: 8px;">
+                        🤖 {'AI Farm Advisor (Voice Microphone & Leaf Pathology Vision)' if lang == 'en' else 'ఏఐ వ్యవసాయ సలహాదారు (వాయిస్ మైక్ & తెగుళ్ల ఫోటో పరీక్ష)'}
+                    </div>
+                    <div style="font-size: 0.9rem; color: #527964; margin-top: 4px;">
+                        {'Speak in English or Telugu (Whisper ASR), snap a photo of diseased leaves for instant ICAR diagnosis, or ask farm planning questions.' if lang == 'en' else 'తెలుగు లేదా ఇంగ్లీషులో మాట్లాడండి, ఆకు తెగులు ఫోటో తీసి తక్షణ నివారణ చర్యలను పొందండి.'}
+                    </div>
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    col_adv1, col_adv2 = st.columns(2)
+    with col_adv1:
+        st.button(
+            "🎙️ " + ("Open Voice & Chat Advisor" if lang == "en" else "వాయిస్ & చాట్ సలహాదారుని తెరవండి"),
+            key="home_btn_open_voice_adv",
+            type="primary",
+            width="stretch",
+            on_click=navigate_to,
+            args=("AI FARM ADVISOR",),
+        )
+    with col_adv2:
+        st.button(
+            "📷 " + ("Open Leaf Disease Diagnosis" if lang == "en" else "ఆకు తెగులు ఫోటో పరీక్ష తెరవండి"),
+            key="home_btn_open_vision_adv",
+            width="stretch",
+            on_click=navigate_to,
+            args=("AI FARM ADVISOR",),
+        )
+
+    st.markdown("<div style='margin-bottom: 18px;'></div>", unsafe_allow_html=True)
 
     # Weather extraction
     is_wx_success = weather_data.get("success", False)
@@ -439,54 +480,54 @@ def render_home_view(
         st.button(
             f"🤖 {get_text('btn_ask_advisor', lang)}",
             key="home_btn_advisor",
-            on_click=nav_cb,
-            args=("AI Farm Advisor",) if nav_cb else None,
             width="stretch",
+            on_click=nav_cb,
+            args=("AI FARM ADVISOR",),
         )
 
     with qcol2:
         st.button(
             f"🌦️ {get_text('btn_view_weather', lang)}",
             key="home_btn_weather",
-            on_click=nav_cb,
-            args=("Weather",) if nav_cb else None,
             width="stretch",
+            on_click=nav_cb,
+            args=("WEATHER",),
         )
 
     with qcol3:
         st.button(
             f"🌱 {get_text('btn_edit_farm', lang)}",
             key="home_btn_farm",
-            on_click=nav_cb,
-            args=("My Farm",) if nav_cb else None,
             width="stretch",
+            on_click=nav_cb,
+            args=("MY FARM",),
         )
 
     with qcol4:
         st.button(
             f"📖 {get_text('btn_crop_guide', lang)}",
             key="home_btn_guide",
-            on_click=nav_cb,
-            args=("Crop Guidance",) if nav_cb else None,
             width="stretch",
+            on_click=nav_cb,
+            args=("CROP GUIDANCE",),
         )
 
     with qcol5:
         st.button(
             f"🔮 {'Simulator' if lang == 'en' else 'సిమ్యులేటర్'}",
             key="home_btn_sim",
-            on_click=nav_cb,
-            args=("SIMULATOR",) if nav_cb else None,
             width="stretch",
+            on_click=nav_cb,
+            args=("SIMULATOR",),
         )
 
     with qcol6:
         st.button(
             f"🌊 {'ENSO' if lang == 'en' else 'ఎల్ నినో'}",
             key="home_btn_enso",
-            on_click=nav_cb,
-            args=("ENSO",) if nav_cb else None,
             width="stretch",
+            on_click=nav_cb,
+            args=("ENSO",),
         )
 
     # Footer note

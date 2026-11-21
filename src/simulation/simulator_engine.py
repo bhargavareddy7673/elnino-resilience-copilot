@@ -71,7 +71,7 @@ def get_baseline_climate(
         data provenance labels, and extrapolation disclosures.
     """
     state = farm_profile.get("state", "Andhra Pradesh")
-    district = farm_profile.get("district", "Kadapa (YSR Kadapa)")
+    district = farm_profile.get("district", "Kurnool")
     village = farm_profile.get("village", "").strip()
 
     if weather_data is None:

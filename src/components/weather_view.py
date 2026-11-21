@@ -45,7 +45,7 @@ def render_weather_view(
         navigate_to: Optional navigation callback to switch screens.
     """
     state = farm_profile.get("state", "Andhra Pradesh")
-    district = farm_profile.get("district", "Kadapa (YSR Kadapa)")
+    district = farm_profile.get("district", "Kurnool")
     village = farm_profile.get("village", "").strip()
     crop = farm_profile.get("crop", "Turmeric")
     sowing_date_val = farm_profile.get("sowing_date")
@@ -339,9 +339,9 @@ def render_weather_view(
                 st.button(
                     label=get_text("btn_open_simulator_for_date", lang),
                     key="btn_nav_sim_beyond_horizon",
+                    type="primary",
                     on_click=navigate_to,
                     args=("SIMULATOR",),
-                    type="primary",
                 )
 
         elif plan_status == "HISTORICAL":

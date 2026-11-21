@@ -265,13 +265,20 @@ INTENT_DEFINITIONS: Dict[str, Dict[str, Any]] = {
         ],
     },
     "crop_advisory": {
-        "description": "Agronomic advice, stage-specific precautions, mulching, resilience tips, and crop management.",
+        "description": "Agronomic advice, stage-specific precautions, mulching, resilience tips, irrigation guidance, and crop management.",
         "examples_en": [
+            "How can I irrigate turmeric?",
+            "How often should I water turmeric?",
+            "How much water does turmeric need?",
+            "When should I irrigate my turmeric crop?",
+            "Turmeric irrigation schedule",
             "What precautions should I take for my banana crop?",
             "How to manage turmeric in hot weather?",
             "What agronomic practices are recommended for paddy?",
         ],
         "examples_te": [
+            "పసుపు పంటకు నీరు ఎప్పుడు పెట్టాలి?",
+            "నా turmeric crop కి ఎంత నీరు అవసరం?",
             "నా అరటి పంటకు ఎలాంటి జాగ్రత్తలు తీసుకోవాలి?",
             "పసుపు పంటలో ఎండ వేడికి ఏం చేయాలి?",
             "నా పంట రక్షణకు సూచనలు ఇవ్వండి",
@@ -464,7 +471,7 @@ INTENT_PATTERNS: List[Tuple[str, List[str], int]] = [
         ],
         7,
     ),
-    # 8. Crop advisory
+    # 8. Crop advisory & Irrigation Guidance
     (
         "crop_advisory",
         [
@@ -484,8 +491,121 @@ INTENT_PATTERNS: List[Tuple[str, List[str], int]] = [
             r"how to care",
             r"protect.*crop",
             r"fertilizer",
+            r"fertilizers",
+            r"eruvulu",
+            r"yeruvulu",
+            r"yerbulu",
+            r"yerubulu",
+            r"eruvu",
+            r"yeruvu",
+            r"ఎరువులు",
+            r"ఎరువు",
+            r"ఎరువుల",
+            r"యూరియా",
+            r"డిఎపి",
+            r"పొటాష్",
+            r"వేపపిండి",
+            r"eppudu\s+veyyali",
+            r"eppudu\s+veyali",
+            r"yopude\s+yali",
+            r"yepudu\s+yali",
+            r"yopudu\s+yali",
             r"mulching",
             r"windbreak",
+
+            # Pathology, Pests & Crop Protection
+            r"rot\b",
+            r"blight\b",
+            r"leaf\s+spot",
+            r"wilt\b",
+            r"blast\b",
+            r"sigatoka",
+            r"bph\b",
+            r"pest\b",
+            r"pests\b",
+            r"disease\b",
+            r"diseases\b",
+            r"symptom\b",
+            r"symptoms\b",
+            r"cure\b",
+            r"treatment\b",
+            r"spray\b",
+            r"spraying\b",
+            r"fungicide\b",
+            r"pesticide\b",
+            r"insecticide\b",
+            r"weed\b",
+            r"weeds\b",
+            r"weed\s+control",
+            r"kalupu",
+            r"tegulu",
+            r"tegululu",
+            r"purugu",
+            r"purugulu",
+            r"తెగులు",
+            r"తెగుళ్ళు",
+            r"పురుగు",
+            r"పురుగులు",
+            r"నివారణ",
+            r"పిచికారీ",
+            r"కలుపు",
+            r"దుంపకుళ్లు",
+            r"అగ్గితెగులు",
+            r"సుడిదోమ",
+
+            # Seeds, Sowing & Land Prep
+            r"seed\b",
+            r"seeds\b",
+            r"sowing\b",
+            r"planting\b",
+            r"spacing\b",
+            r"variety\b",
+            r"varieties\b",
+            r"intercrop\b",
+            r"intercropping\b",
+            r"harvest\b",
+            r"harvesting\b",
+            r"yield\b",
+            r"koto\b",
+            r"kotha\b",
+            r"koyyali\b",
+            r"koi\b",
+            r"arabalce\b",
+            r"arabettali\b",
+            r"aarabettali\b",
+            r"udikinchali\b",
+            r"curing\b",
+            r"boil\b",
+            r"boiling\b",
+            r"drying\b",
+            r"విత్తన",
+            r"విత్తనాలు",
+            r"నాటడం",
+            r"కోత",
+            r"ఉడకబెట్టడం",
+            r"ఆరబెట్టడం",
+            r"దిగుబడి",
+            r"రకాలు",
+            # Irrigation & Watering Patterns
+            r"\bhow\s+(can|to|do|should)\s+(i\s+)?irrigate\b",
+            r"\bhow\s+can\s+irrigate\b",
+            r"\bhow\s+to\s+irrigate\b",
+            r"\bhow\s+(can|to|do|should)\s+(i\s+)?water\b",
+            r"\bhow\s+often\s+should\s+(i\s+)?water\b",
+            r"\bhow\s+much\s+water\s+does\b",
+            r"\bhow\s+much\s+water\s+is\s+needed\b",
+            r"\bhow\s+much\s+water\b",
+            r"\b(when|eppudu)\s+should\s+(i\s+)?irrigate\b",
+            r"\b(when|eppudu)\s+to\s+irrigate\b",
+            r"\bwhen\s+should\s+(i\s+)?water\b",
+            r"\birrigate\s+(my\s+)?(turmeric|banana|paddy|crop)\b",
+            r"\b(irrigation|watering)\s+(schedule|interval|frequency|method|timing)\b",
+            r"\b(needs?|need)\s+water.*what\s+should\s+i\s+do\b",
+            r"\bhow\s+to\s+manage\s+water\b",
+            r"\bwater\s+management\b",
+            r"\bwater\s+requirement\b",
+            r"\birrigation\s+guidance\b",
+            r"\b(drip|furrow|flood)\s+irrigation\b",
             r"how should i irrigate",
             r"precautions.*emiti",
             r"jagratthalu",
@@ -497,10 +617,24 @@ INTENT_PATTERNS: List[Tuple[str, List[str], int]] = [
             r"ఏం చేయాలి",
             r"ఏమి చేయాలి",
             r"సలహా",
-            r"నీరు ఎలా పెట్టాలి",
-            r"నీటి యాజమాన్యం",
+            # Telugu & Code-mixed Irrigation Patterns
+            r"నీరు\s+ఎప్పుడు\s+పెట్టాలి",
+            r"నీరు\s+ఎలా\s+పెట్టాలి",
+            r"నీరు\s+పెట్టే\s+సమయం",
+            r"ఎంత\s+నీరు\s+అవసరం",
+            r"నీటి\s+అవసరం",
+            r"నీటి\s+యాజమాన్యం",
+            r"ఎన్ని\s+రోజులకు\s+ఒకసారి\s+నీరు",
+            r"తడి\s+ఎప్పుడు\s+ఇవ్వాలి",
+            r"తడులు\s+ఎలా\s+ఇవ్వాలి",
+            r"పంటకు\s+నీరు\s+అవసరం",
+            r"water\s+(eppudu|ela)\s+(pettali|ivvali)",
+            r"irrigation\s+schedule\s+ela",
+            r"crop\s+ki\s+entha\s+water\s+avasaram",
+            r"irrigation\s+eppudu\s+pettali",
+            r"water\s+management\s+tips",
         ],
-        8,
+        10,
     ),
     # 9. What-If Simulation
     (
@@ -604,6 +738,8 @@ def classify_intent(
         scores["dry_spell_status"] += 5
     if "water_stress" in concepts:
         scores["water_stress"] += 5
+    if "irrigation" in concepts or "water_management" in concepts or extracted_entities.get("topic") == "Water management":
+        scores["crop_advisory"] += 12
     if "temperature" in concepts:
         if time_p == "current":
             scores["current_weather"] += 3
@@ -631,6 +767,30 @@ def classify_intent(
     if any(k in combined_text for k in ["జాగ్రత్తలు", "precaution", "teeskovali", "teesukovali", "em care", "protect my"]):
         scores["crop_advisory"] += 8
 
+    # Irrigation & Water Guidance Disambiguation
+    if any(k in combined_text for k in [
+        "how can irrigate", "how to irrigate", "how can i irrigate", "how often should i water",
+        "how much water", "when should i irrigate", "when to irrigate", "irrigation schedule",
+        "needs water", "manage water", "water requirement", "water management",
+        "నీరు ఎప్పుడు పెట్టాలి", "ఎంత నీరు అవసరం", "నీటి యాజమాన్యం", "నీరు ఎలా పెట్టాలి",
+        "తడి ఎప్పుడు ఇవ్వాలి", "తడులు ఎలా ఇవ్వాలి", "water avasaram", "water pettali", "water ivvali",
+        "water eppudu kattali", "water kattali", "neellu kattali", "neellu pettali", "neellu eppudu",
+        "irrigate water"
+    ]):
+        scores["crop_advisory"] += 15
+
+    # Agricultural Protection, Pathology, Pests, Nutrition & Field Operations Disambiguation
+    if any(k in combined_text for k in [
+        "fertilizer", "fertilizers", "manure", "fym", "urea", "dap", "potash", "yerbulu", "yerubulu", "yeruvulu", "eruvulu", "eruvu", "yeruvu", "ఎరువులు", "ఎరువు", "వేపపిండి",
+        "rot", "blight", "spot", "blotch", "wilt", "blast", "sigatoka", "dumpakullu", "verukullu", "aakumacha", "tegulu", "rogam", "roganiki", "teguluki", "తెగులు", "తెగుళ్ళు", "కుళ్లు", "మచ్చ",
+        "pest", "pests", "borer", "scale", "thrips", "bph", "weevil", "purugu", "purugulu", "puruguki", "sudidoma", "పురుగు", "పురుగులు",
+        "herbicide", "weed", "weeds", "kalupu", "కలుపు",
+        "harvest", "harvesting", "curing", "koto", "kotha", "koyyali", "koi", "arabalce", "arabettali", "udikinchali", "కోత", "ఉడకబెట్టడం", "ఆరబెట్టడం",
+        "seed", "seeds", "sowing", "planting", "spacing", "vithanam", "vithanalu", "విత్తనం", "విత్తనాలు",
+        "spray", "spraying", "mandu", "mandulu", "kottali", "picikari", "పిచికారీ", "మందు"
+    ]):
+        scores["crop_advisory"] += 15
+
     # What-If Simulation disambiguation heuristic
     if any(k in combined_text for k in [
         "scenario", "most concerning", "rainfall decrease", "rain decrease", "if rainfall",
@@ -648,6 +808,46 @@ def classify_intent(
             "all_scores": scores,
         }
 
+    # High-priority agronomic rule override (diseases, pests, weeds, fertilizers, seeds, planting, irrigation)
+    if scores.get("crop_advisory", 0) >= 8:
+        other_max = max(
+            scores.get("current_weather", 0),
+            scores.get("weather_forecast", 0),
+            scores.get("rainfall_status", 0),
+            scores.get("dry_spell_status", 0),
+            scores.get("general_farm_question", 0),
+        )
+        if scores["crop_advisory"] > other_max:
+            if use_ml:
+                ml_clf = get_ml_classifier()
+                if ml_clf is not None:
+                    try:
+                        probs = ml_clf.predict_proba([raw_text])[0]
+                        best_idx = int(np.argmax(probs))
+                        ml_conf = float(probs[best_idx])
+                        ml_intent = ml_clf.labels[best_idx]
+                        is_irrigation_timing = any(k in combined_text for k in [
+                            "eppudu", "when", "schedule", "kattali", "pettali", "ivvali", "how often", "how much", "how to irrigate", "how can irrigate"
+                        ])
+                        if is_irrigation_timing and ml_intent == "water_stress":
+                            # Irrigation scheduling questions belong to crop_advisory, not water_stress risk
+                            pass
+                        elif ml_conf >= 0.85 and ml_intent in INTENT_DEFINITIONS and ml_intent != "out_of_scope":
+                            return {
+                                "intent": ml_intent,
+                                "confidence": round(ml_conf, 2),
+                                "matched_rule": f"SetFit MiniLM-L12-v2 (ML, conf={ml_conf:.2f})",
+                                "all_scores": scores,
+                            }
+                    except Exception:
+                        pass
+            return {
+                "intent": "crop_advisory",
+                "confidence": 0.95,
+                "matched_rule": matched_rules.get("crop_advisory", "crop_advisory pattern match"),
+                "all_scores": scores,
+            }
+
     # Attempt ML Classification via fine-tuned SetFit model
     if use_ml:
         ml_clf = get_ml_classifier()
@@ -659,13 +859,27 @@ def classify_intent(
                 ml_intent = ml_clf.labels[best_idx]
                 if ml_conf >= 0.55:
                     if ml_intent == "out_of_scope":
-                        # Explicit ML rejection for unrelated/non-agricultural queries
-                        return {
-                            "intent": "unknown",
-                            "confidence": round(ml_conf, 2),
-                            "matched_rule": f"SetFit MiniLM-L12-v2 (ML OOS Rejection, conf={ml_conf:.2f})",
-                            "all_scores": scores,
-                        }
+                        # Safety check: if query has an explicit agricultural crop or concept, do not falsely reject as OOS
+                        has_agri_entity = (
+                            extracted_entities.get("crop_source") == "query"
+                            or bool(concepts)
+                            or scores.get("crop_advisory", 0) >= 8
+                            or any(k in combined_text for k in [
+                                "irrigate", "irrigation", "turmeric", "banana", "paddy", "crop", "farm",
+                                "panta", "pasupu", "arati", "vari", "weather", "soil", "temperature",
+                                "water", "rain", "dry spell", "dumpakullu", "purugu", "tegulu", "rogam",
+                                "mandu", "spray", "kottali", "yeruvulu", "eruvulu", "yerbulu", "harvest",
+                                "kotha", "koto", "koi", "arabalce", "arabettali", "kalupu", "vithanam"
+                            ])
+                        )
+                        if not has_agri_entity:
+                            # Explicit ML rejection for unrelated/non-agricultural queries
+                            return {
+                                "intent": "unknown",
+                                "confidence": round(ml_conf, 2),
+                                "matched_rule": f"SetFit MiniLM-L12-v2 (ML OOS Rejection, conf={ml_conf:.2f})",
+                                "all_scores": scores,
+                            }
                     elif ml_intent in INTENT_DEFINITIONS:
                         return {
                             "intent": ml_intent,

@@ -368,7 +368,7 @@ DISTRICT_COORDINATES: Dict[str, Dict[str, Any]] = {
     },
 }
 
-DEFAULT_COORDINATES = DISTRICT_COORDINATES["Kadapa (YSR Kadapa)"]
+DEFAULT_COORDINATES = DISTRICT_COORDINATES["Kurnool"]
 
 
 def get_district_coordinates(state: str, district: str, village: str = "") -> Dict[str, Any]:
@@ -386,10 +386,10 @@ def get_district_coordinates(state: str, district: str, village: str = "") -> Di
     coord_info = DISTRICT_COORDINATES.get(district)
     
     if not coord_info:
-        # Fallback safely to Kadapa default
+        # Fallback safely to Kurnool default
         coord_info = DEFAULT_COORDINATES
         is_fallback = True
-        district_name = "Kadapa (YSR Kadapa)"
+        district_name = "Kurnool"
         state_name = "Andhra Pradesh"
     else:
         is_fallback = False

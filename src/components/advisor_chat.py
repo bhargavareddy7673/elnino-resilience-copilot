@@ -28,7 +28,7 @@ def render_advisor_chat(farm_profile: Dict[str, Any], lang: str = "en") -> None:
     init_chat_session_state()
 
     crop = farm_profile.get("crop", "Turmeric")
-    district = farm_profile.get("district", "Kadapa (YSR Kadapa)")
+    district = farm_profile.get("district", "Kurnool")
 
     # Title & Agent Status Bar
     st.markdown(f"### {get_text('advisor_tab_title', lang)}")

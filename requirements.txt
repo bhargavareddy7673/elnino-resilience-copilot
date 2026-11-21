@@ -1,6 +1,5 @@
-# El Niño Resilience Co-Pilot - Python Dependencies
+# RythuMithra AI: Smart Farming & Climate Advisor - Python Dependencies
 # Production dependencies for Streamlit Community Cloud and Local Execution
-# Verified in clean virtual environment (Python 3.11.17)
 
 # Core Streamlit Web Application Framework
 streamlit>=1.30.0,<=1.66.1
@@ -9,11 +8,18 @@ plotly>=5.18.0,<=7.1.0
 pandas>=1.5.0,<=3.1.0
 numpy>=1.24.0,<=2.4.6
 
-# Transformer-based Multilingual NLP (SetFit Intent Classification)
-# Pinned to verified, tested runtime versions
+# Multilingual Transformer NLP & Semantic Search
 torch>=2.0.0,<=2.15.0
 transformers>=4.35.0,<=5.22.1
 sentence-transformers>=2.2.2,<=6.2.0
 setfit>=1.0.0,<=1.2.0
 huggingface-hub>=0.20.0,<=2.4.0
 scikit-learn>=1.2.0,<=1.9.1
+scipy>=1.10.0,<=1.17.1
+
+# Multimodal Audio, Speech & Document Processing
+soundfile>=0.12.0
+imageio-ffmpeg>=0.4.9
+gTTS>=2.4.0
+pymupdf>=1.23.0
+pillow>=10.0.0

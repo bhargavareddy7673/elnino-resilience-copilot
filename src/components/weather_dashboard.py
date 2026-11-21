@@ -29,7 +29,7 @@ def render_weather_dashboard(farm_profile: Dict[str, Any], lang: str = "en") -> 
         lang: Selected language code ('en' or 'te').
     """
     state = farm_profile.get("state", "Andhra Pradesh")
-    district = farm_profile.get("district", "Kadapa (YSR Kadapa)")
+    district = farm_profile.get("district", "Kurnool")
     village = farm_profile.get("village", "").strip()
 
     # 1. Resolve Geographic Coordinates

@@ -12,9 +12,19 @@ from typing import Dict, Any
 TELUGU_CHAR_PATTERN = re.compile(r"[\u0c00-\u0c7f]")
 LATIN_CHAR_PATTERN = re.compile(r"[a-zA-Z]")
 
+TELUGU_ROMAN_TOKENS = {
+    "na", "maa", "me", "pantaku", "panta", "pantalo", "paspupanta", "paspu", "pasupu", "aratipanta", "arati", "ariti", "vari",
+    "yeruvulu", "yerubulu", "eruvulu", "eruvu", "yeruvu", "eppudu", "yepudu", "yopude", "yali", "veyali", "kottali",
+    "mandulu", "mandu", "varsham", "vaana", "paduthunda", "padtada", "padutada", "entha", "yenta", "undhi", "undi",
+    "neellu", "neeru", "pettali", "kattali", "ivvali", "ela", "yela", "emi", "yemi", "cheyali", "cheyala",
+    "tegulu", "teguluki", "purugu", "puruguki", "rogam", "aakumacha", "dumpakullu", "kotha", "koyyali",
+    "polam", "chenu", "bhoomi", "nela", "matti", "tadulu", "tadi", "gurinchi", "cheppandi", "theliyacheyandi",
+    "jagratthalu", "jagrattha", "pasuvula", "vepindi", "karuvu"
+}
+
 
 def detect_language(text: str) -> Dict[str, Any]:
-    """Detect whether text is predominantly Telugu or English.
+    """Detect whether text is predominantly Telugu (Unicode or Tanglish) or English.
     
     Args:
         text: Input user question string.
@@ -56,14 +66,22 @@ def detect_language(text: str) -> Dict[str, Any]:
 
     is_mixed = telugu_count > 0 and latin_count > 0
 
-    # If any meaningful Telugu characters are present, prioritize Telugu response
+    # 1. If any Telugu Unicode characters are present, definitely Telugu
     if telugu_count > 0:
         telugu_ratio = telugu_count / total_alpha
         primary_lang = "te"
         conf = 0.6 + (0.4 * telugu_ratio)
     else:
-        primary_lang = "en"
-        conf = 0.95
+        # 2. Check for Romanized Telugu / Tanglish farmer vocabulary
+        words = set(re.findall(r"\b[a-z]+\b", clean_text.lower()))
+        tanglish_matches = words.intersection(TELUGU_ROMAN_TOKENS)
+        if tanglish_matches:
+            primary_lang = "te"
+            is_mixed = True
+            conf = 0.90
+        else:
+            primary_lang = "en"
+            conf = 0.95
 
     return {
         "lang": primary_lang,

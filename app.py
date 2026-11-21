@@ -12,13 +12,22 @@ Sections:
 """
 
 from typing import Dict, Any
+import importlib
 import streamlit as st
 
+import src.localization as _loc_mod
+importlib.reload(_loc_mod)
 from src.localization import get_text
+
+import src.multimodal.audio_transcriber as _aud_mod
+importlib.reload(_aud_mod)
+
+import src.components.advisor_view as _adv_mod
+importlib.reload(_adv_mod)
+render_advisor_view = _adv_mod.render_advisor_view
 from src.components.home_view import render_home_view
 from src.components.farm_view import render_farm_view, initialize_farm_state
 from src.components.weather_view import render_weather_view
-from src.components.advisor_view import render_advisor_view
 from src.components.crop_guidance_view import render_crop_guidance_view
 from src.components.simulator_view import render_simulator_view
 from src.components.enso_view import render_enso_view
@@ -349,22 +358,34 @@ NAV_CONFIG = {
 }
 NAV_KEYS = list(NAV_CONFIG.keys())
 
-# Check for pending navigation request (e.g. from quick action buttons)
+# Check for pending navigation request (e.g. from quick action buttons or query params)
 # safely BEFORE the sidebar radio widget is instantiated!
+if "tab" in st.query_params:
+    qp_val = str(st.query_params.get("tab", "")).strip().lower()
+    for k in NAV_KEYS:
+        if qp_val in k.lower() or (qp_val in ["advisor", "chatbot", "chat", "ai"] and "ADVISOR" in k):
+            st.session_state.active_nav = k
+            st.session_state["nav_radio_select"] = k
+            break
+
 if "pending_nav" in st.session_state and st.session_state["pending_nav"]:
     pending_target = st.session_state.pop("pending_nav")
     st.session_state.active_nav = pending_target
     st.session_state["nav_radio_select"] = pending_target
+    try:
+        st.session_state["top_screen_nav_pills"] = pending_target
+    except Exception:
+        pass
 
 if "nav_radio_select" not in st.session_state or st.session_state["nav_radio_select"] not in NAV_KEYS:
     st.session_state["nav_radio_select"] = "HOME"
 
 st.session_state.active_nav = st.session_state["nav_radio_select"]
 
-# Navigation helper for Home quick shortcuts
+# Navigation helper for Home quick shortcuts and cross-screen buttons
 def navigate_to_section(section_name: str) -> None:
     """Safely switch the active navigation view."""
-    sec_clean = section_name.strip().upper()
+    sec_clean = str(section_name).strip().upper()
     # Map common variations
     mapping = {
         "HOME": "HOME",
@@ -373,6 +394,7 @@ def navigate_to_section(section_name: str) -> None:
         "WEATHER": "WEATHER",
         "AI FARM ADVISOR": "AI FARM ADVISOR",
         "ADVISOR": "AI FARM ADVISOR",
+        "AI ADVISOR": "AI FARM ADVISOR",
         "CROP GUIDANCE": "CROP GUIDANCE",
         "GUIDE": "CROP GUIDANCE",
         "SIMULATOR": "SIMULATOR",
@@ -388,13 +410,11 @@ def navigate_to_section(section_name: str) -> None:
     target = mapping.get(sec_clean, "HOME")
     st.session_state.active_nav = target
     st.session_state["pending_nav"] = target
-    try:
-        st.session_state["nav_radio_select"] = target
-    except Exception:
-        # If the radio widget is already instantiated in the current run,
-        # pending_nav will safely update st.session_state['nav_radio_select']
-        # before widget instantiation on the next rerun.
-        pass
+    for key in ["nav_radio_select", "top_screen_nav_pills"]:
+        try:
+            st.session_state[key] = target
+        except Exception:
+            pass
 
 
 # =============================================================================
@@ -405,11 +425,11 @@ with st.sidebar:
     st.markdown(
         """
         <div style="padding: 6px 0 16px 0; border-bottom: 1px solid #e2ebe5; margin-bottom: 16px;">
-            <div style="font-size: 1.25rem; font-weight: 800; color: #1b4332; display: flex; align-items: center; gap: 8px;">
-                🌾 Co-Pilot
+            <div style="font-size: 1.25rem; font-weight: 800; color: #1b4332; display: flex; align-items: center; gap: 8px; line-height: 1.25;">
+                🌾 El Niño Resilience Co-Pilot
             </div>
-            <div style="font-size: 0.8rem; color: #406a52; font-weight: 500; margin-top: 2px;">
-                Farm Digital Twin & Resilience Advisor
+            <div style="font-size: 0.82rem; color: #2D6A4F; font-weight: 700; margin-top: 4px;">
+                రైతు మిత్ర (RythuMithra) • Farm Digital Twin & Climate Advisor
             </div>
         </div>
         """,
@@ -483,6 +503,31 @@ with st.sidebar:
 # =============================================================================
 # 5. MAIN APPLICATION CONTENT ROUTING (The 5 Screens)
 # =============================================================================
+# Prominent Top Navigation Bar (Always visible even if sidebar is collapsed)
+if "top_screen_nav_pills" not in st.session_state or st.session_state["top_screen_nav_pills"] != st.session_state.active_nav:
+    try:
+        st.session_state["top_screen_nav_pills"] = st.session_state.active_nav
+    except Exception:
+        pass
+
+top_selected = st.pills(
+    "Navigation Menu",
+    NAV_KEYS,
+    format_func=lambda k: NAV_CONFIG[k][lang],
+    key="top_screen_nav_pills",
+    label_visibility="collapsed",
+)
+if top_selected is None:
+    try:
+        st.session_state["top_screen_nav_pills"] = st.session_state.active_nav
+    except Exception:
+        pass
+elif top_selected != st.session_state.active_nav:
+    navigate_to_section(top_selected)
+    st.rerun()
+
+st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
+
 active_screen = st.session_state.active_nav
 
 if active_screen == "HOME":
