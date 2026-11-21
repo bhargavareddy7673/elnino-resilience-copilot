@@ -12,19 +12,10 @@ Sections:
 """
 
 from typing import Dict, Any
-import importlib
 import streamlit as st
 
-import src.localization as _loc_mod
-importlib.reload(_loc_mod)
 from src.localization import get_text
-
-import src.multimodal.audio_transcriber as _aud_mod
-importlib.reload(_aud_mod)
-
-import src.components.advisor_view as _adv_mod
-importlib.reload(_adv_mod)
-render_advisor_view = _adv_mod.render_advisor_view
+from src.components.advisor_view import render_advisor_view
 from src.components.home_view import render_home_view
 from src.components.farm_view import render_farm_view, initialize_farm_state
 from src.components.weather_view import render_weather_view
@@ -358,35 +349,27 @@ NAV_CONFIG = {
 }
 NAV_KEYS = list(NAV_CONFIG.keys())
 
+if "active_nav" not in st.session_state or st.session_state["active_nav"] not in NAV_KEYS:
+    st.session_state["active_nav"] = "HOME"
+
 # Check for pending navigation request (e.g. from quick action buttons or query params)
-# safely BEFORE the sidebar radio widget is instantiated!
 if "tab" in st.query_params:
     qp_val = str(st.query_params.get("tab", "")).strip().lower()
     for k in NAV_KEYS:
         if qp_val in k.lower() or (qp_val in ["advisor", "chatbot", "chat", "ai"] and "ADVISOR" in k):
             st.session_state.active_nav = k
-            st.session_state["nav_radio_select"] = k
             break
 
-if "pending_nav" in st.session_state and st.session_state["pending_nav"]:
-    pending_target = st.session_state.pop("pending_nav")
-    st.session_state.active_nav = pending_target
-    st.session_state["nav_radio_select"] = pending_target
-    try:
-        st.session_state["top_screen_nav_pills"] = pending_target
-    except Exception:
-        pass
-
 if "nav_radio_select" not in st.session_state or st.session_state["nav_radio_select"] not in NAV_KEYS:
-    st.session_state["nav_radio_select"] = "HOME"
+    st.session_state["nav_radio_select"] = st.session_state["active_nav"]
 
-st.session_state.active_nav = st.session_state["nav_radio_select"]
+if "top_screen_nav_pills" not in st.session_state or st.session_state["top_screen_nav_pills"] not in NAV_KEYS:
+    st.session_state["top_screen_nav_pills"] = st.session_state["active_nav"]
 
 # Navigation helper for Home quick shortcuts and cross-screen buttons
 def navigate_to_section(section_name: str) -> None:
     """Safely switch the active navigation view."""
     sec_clean = str(section_name).strip().upper()
-    # Map common variations
     mapping = {
         "HOME": "HOME",
         "MY FARM": "MY FARM",
@@ -408,8 +391,7 @@ def navigate_to_section(section_name: str) -> None:
         "ENSO OUTLOOK": "ENSO",
     }
     target = mapping.get(sec_clean, "HOME")
-    st.session_state.active_nav = target
-    st.session_state["pending_nav"] = target
+    st.session_state["active_nav"] = target
     for key in ["nav_radio_select", "top_screen_nav_pills"]:
         try:
             st.session_state[key] = target
@@ -475,15 +457,20 @@ with st.sidebar:
     # 4. Five Main Navigation Sections
     st.markdown(f"**{'Navigation' if lang == 'en' else 'విభాగాలు'}**")
 
-    # Radio navigation driven by key="nav_radio_select"
-    selected_nav = st.radio(
+    def on_sidebar_nav_change():
+        sel = st.session_state.get("nav_radio_select")
+        if sel:
+            st.session_state["active_nav"] = sel
+            st.session_state["top_screen_nav_pills"] = sel
+
+    st.radio(
         label="Navigation Menu",
         options=NAV_KEYS,
         format_func=lambda k: NAV_CONFIG[k][lang],
         label_visibility="collapsed",
         key="nav_radio_select",
+        on_change=on_sidebar_nav_change,
     )
-    st.session_state.active_nav = selected_nav
 
     st.markdown("<div style='margin-top: 30px;'></div>", unsafe_allow_html=True)
 
@@ -504,31 +491,27 @@ with st.sidebar:
 # 5. MAIN APPLICATION CONTENT ROUTING (The 5 Screens)
 # =============================================================================
 # Prominent Top Navigation Bar (Always visible even if sidebar is collapsed)
-if "top_screen_nav_pills" not in st.session_state or st.session_state["top_screen_nav_pills"] != st.session_state.active_nav:
-    try:
-        st.session_state["top_screen_nav_pills"] = st.session_state.active_nav
-    except Exception:
-        pass
+def on_top_nav_change():
+    sel = st.session_state.get("top_screen_nav_pills")
+    if sel:
+        st.session_state["active_nav"] = sel
+        st.session_state["nav_radio_select"] = sel
+    else:
+        # Farmer clicked the already active pill -> keep it active
+        st.session_state["top_screen_nav_pills"] = st.session_state.get("active_nav", "HOME")
 
-top_selected = st.pills(
+st.pills(
     "Navigation Menu",
     NAV_KEYS,
     format_func=lambda k: NAV_CONFIG[k][lang],
     key="top_screen_nav_pills",
     label_visibility="collapsed",
+    on_change=on_top_nav_change,
 )
-if top_selected is None:
-    try:
-        st.session_state["top_screen_nav_pills"] = st.session_state.active_nav
-    except Exception:
-        pass
-elif top_selected != st.session_state.active_nav:
-    navigate_to_section(top_selected)
-    st.rerun()
 
 st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
 
-active_screen = st.session_state.active_nav
+active_screen = st.session_state.get("active_nav", "HOME")
 
 if active_screen == "HOME":
     render_home_view(

@@ -437,19 +437,20 @@ def render_simulator_view(
             if lang == "te"
             else f"Which scenario is most concerning for my {crop.lower()} crop?"
         )
-        if st.button(
-            "🤖 " + get_text("btn_ask_advisor_sim", lang),
-            key="btn_goto_advisor_from_sim",
-            width="stretch",
-            type="primary",
-        ):
-            # Preload question into chat history or pending query
+        def _on_ask_advisor():
             if "chat_history" not in st.session_state:
                 st.session_state.chat_history = []
             st.session_state["pending_advisor_query"] = adv_prompt
             if navigate_to:
                 navigate_to("AI FARM ADVISOR")
-                st.rerun()
+
+        st.button(
+            "🤖 " + get_text("btn_ask_advisor_sim", lang),
+            key="btn_goto_advisor_from_sim",
+            width="stretch",
+            type="primary",
+            on_click=_on_ask_advisor,
+        )
 
     # 10. Uncertainty & Methodology Expander
     expander_title = "ℹ️ " + ("Mathematical Engine Assumptions & Disclaimers" if lang == "en" else "సిమ్యులేషన్ సూత్రాలు & పరిమితులు")
